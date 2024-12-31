@@ -3,3 +3,10 @@ port: 8081
 spring:
   datasource:
     url: jdbc:h2:mem:devdb;create=true
+
+jwt:
+  secret: cHJvZHVjdC10cmlhbC1qd3Qtc2VjcmV0LWtleQ==
+  expiration: 86_400_000
+
+admin:
+  email: admin@admin.com
