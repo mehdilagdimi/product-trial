@@ -1,9 +1,8 @@
 package com.alten.mehdilagdimi.product.trial.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public record UserAccount(
@@ -14,6 +13,10 @@ public record UserAccount(
         String firstname,
         @Column(unique = true)
         String email,
-        String password) {
+        String password,
+        @OneToMany(mappedBy = "user")
+        List<Cart> cart,
+        @OneToOne(mappedBy = "user")
+        WishList wishList) {
 }
 
