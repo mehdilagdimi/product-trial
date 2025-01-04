@@ -4,7 +4,6 @@ public record ProductDtoReq(
                       String code,
                       String name,
                       String description,
-                      String image,
                       String category,
                       float price,
                       int quantity,

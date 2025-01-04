@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -27,18 +28,23 @@ public class ProductController {
     }
 
     @GetMapping(value = "/:id", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity getProductById(@RequestParam @NotNull Long id){
+    public ResponseEntity getProductById(@PathVariable @NotNull Long id){
         return ResponseEntity.ok(productService.getById(id));
     }
 
-    @PatchMapping(value = "/:id", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity updateProductById(@RequestParam @NotNull Long id, @RequestBody ProductDtoReq reqBody){
-        return ResponseEntity.ok(productService.update(id, reqBody));
+    @PatchMapping(value = "/:id", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity updateProductById(
+            @PathVariable @NotNull Long id,
+            @RequestPart ProductDtoReq reqBody,
+            @RequestPart MultipartFile image){
+        return ResponseEntity.ok(productService.update(id, reqBody, image));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity addProduct(@RequestBody ProductDtoReq reqBody){
-        ProductDtoResp dto = productService.save(reqBody);
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity addProduct(
+            @RequestPart ProductDtoReq reqBody,
+            @RequestPart("image") MultipartFile image){
+        ProductDtoResp dto = productService.save(reqBody, image);
         URI uri = ServletUriComponentsBuilder
                     .fromCurrentRequest()
                     .path("/{id}")

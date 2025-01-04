@@ -10,3 +10,6 @@ jwt:
 
 admin:
   email: admin@admin.com
+
+products:
+  imgsDir: ./imgs
