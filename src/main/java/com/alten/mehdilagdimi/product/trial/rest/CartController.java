@@ -2,7 +2,7 @@ package com.alten.mehdilagdimi.product.trial.rest;
 
 import com.alten.mehdilagdimi.product.trial.business.service.CartService;
 import com.alten.mehdilagdimi.product.trial.business.util.JwtUtil;
-import com.alten.mehdilagdimi.product.trial.domain.Cart;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,20 +18,21 @@ public class CartController {
     }
 
     @PostMapping("/{productId}")
-    public Cart addProductToWishlist(@RequestHeader("Authorization") String token, @PathVariable Long productId) {
+    public ResponseEntity addProductToWishlist(@RequestHeader("Authorization") String token, @PathVariable Long productId) {
         String email = jwtUtil.extractUsername(token);
-        return cartService.addProductToCart(email, productId);
+        return ResponseEntity.ok( cartService.addProductToCart(email, productId) );
     }
 
     @DeleteMapping("/{productId}")
-    public Cart removeProductFromWishlist(@RequestHeader("Authorization") String token, @PathVariable Long productId) {
+    public ResponseEntity removeProductFromWishlist(@RequestHeader("Authorization") String token, @PathVariable Long productId) {
         String email = jwtUtil.extractUsername(token);
-        return cartService.removeProductFromCart(email, productId);
+        cartService.removeProductFromCart(email, productId);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping
-    public Cart getWishlist(@RequestHeader("Authorization") String token) {
+    public ResponseEntity getCart(@RequestHeader("Authorization") String token) {
         String email = jwtUtil.extractUsername(token);
-        return cartService.getCart(email);
+        return ResponseEntity.ok( cartService.getCart(email) );
     }
 }

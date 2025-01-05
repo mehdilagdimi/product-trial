@@ -2,7 +2,8 @@ package com.alten.mehdilagdimi.product.trial.rest;
 
 import com.alten.mehdilagdimi.product.trial.business.service.WishListService;
 import com.alten.mehdilagdimi.product.trial.business.util.JwtUtil;
-import com.alten.mehdilagdimi.product.trial.domain.WishList;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,21 +18,22 @@ public class WishListController {
         this.jwtUtil = jwtUtil;
     }
 
-    @PostMapping("/{productId}")
-    public WishList addProductToWishlist(@RequestHeader("Authorization") String token, @PathVariable Long productId) {
+    @PostMapping(value = "/{productId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity addProductToWishlist(@RequestHeader("Authorization") String token, @PathVariable Long productId) {
         String email = jwtUtil.extractUsername(token);
-        return wishlistService.addProductToWishlist(email, productId);
+        return ResponseEntity.ok( wishlistService.addProductToWishlist(email, productId) );
     }
 
     @DeleteMapping("/{productId}")
-    public WishList removeProductFromWishlist(@RequestHeader("Authorization") String token, @PathVariable Long productId) {
+    public ResponseEntity removeProductFromWishlist(@RequestHeader("Authorization") String token, @PathVariable Long productId) {
         String email = jwtUtil.extractUsername(token);
-        return wishlistService.removeProductFromWishList(email, productId);
+        wishlistService.removeProductFromWishlist(email, productId);
+        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
-    public WishList getWishlist(@RequestHeader("Authorization") String token) {
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity getWishlist(@RequestHeader("Authorization") String token) {
         String email = jwtUtil.extractUsername(token);
-        return wishlistService.getWishlist(email);
+        return ResponseEntity.ok( wishlistService.getWishlist(email) );
     }
 }

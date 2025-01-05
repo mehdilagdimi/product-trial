@@ -4,7 +4,10 @@ import com.alten.mehdilagdimi.product.trial.domain.Cart;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+
 @Repository
 public interface CartRepository extends ListCrudRepository<Cart, Long> {
-    Cart findByUserEmailAndIsActive(String userEmail, Boolean isActive);
+    Optional<Cart> findByUserEmail(String userEmail);
 }

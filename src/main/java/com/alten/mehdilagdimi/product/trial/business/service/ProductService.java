@@ -3,6 +3,7 @@ package com.alten.mehdilagdimi.product.trial.business.service;
 import com.alten.mehdilagdimi.product.trial.business.exception.ImageFailToDeleteException;
 import com.alten.mehdilagdimi.product.trial.business.exception.ImageFailToSaveException;
 import com.alten.mehdilagdimi.product.trial.business.exception.ProductNotFoundException;
+import com.alten.mehdilagdimi.product.trial.business.mapper.ProductMapper;
 import com.alten.mehdilagdimi.product.trial.domain.Product;
 import com.alten.mehdilagdimi.product.trial.domain.ProductDtoReq;
 import com.alten.mehdilagdimi.product.trial.domain.ProductDtoResp;

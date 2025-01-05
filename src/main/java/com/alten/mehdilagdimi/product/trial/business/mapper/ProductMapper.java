@@ -1,4 +1,4 @@
-package com.alten.mehdilagdimi.product.trial.business.service;
+package com.alten.mehdilagdimi.product.trial.business.mapper;
 
 import com.alten.mehdilagdimi.product.trial.business.exception.ImageFailToLoadException;
 import com.alten.mehdilagdimi.product.trial.domain.Product;
