@@ -1,5 +1,6 @@
 package com.alten.mehdilagdimi.product.trial.business.mapper;
 
+import com.alten.mehdilagdimi.product.trial.business.exception.ImageFailToLoadException;
 import com.alten.mehdilagdimi.product.trial.domain.InventoryStatus;
 import com.alten.mehdilagdimi.product.trial.domain.Product;
 import com.alten.mehdilagdimi.product.trial.domain.ProductDtoReq;
@@ -8,7 +9,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
+import org.mockito.MockedStatic;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Base64;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -20,6 +27,7 @@ class ProductMapperTest {
     private String basePath;
     private Product product;
     private ProductDtoReq productDtoReq;
+
     private ProductMapper mapper;
 
     @BeforeEach
@@ -74,37 +82,31 @@ class ProductMapperTest {
     }
 
     @Test
-    void shouldMapProductDtoReqToEntity(){
-        mapper = spy(Mappers.getMapper(ProductMapper.class));
-        String base64Str = "base64String";
+    void shouldReturnBase64EncodedString() throws IOException {
+        byte[] data = {0, 0};
+        String encodedata = Base64.getEncoder().encodeToString(data);
+        mapper = Mappers.getMapper(ProductMapper.class);
 
-        doReturn(base64Str).when(mapper).toBase64(anyString(), anyString());
+        try(MockedStatic<Files> mockedFiles = mockStatic(Files.class)){
+            mockedFiles.when( ()-> Files.readAllBytes(any())).thenReturn(data);
+            String result = mapper.toBase64("name", basePath);
 
-        Product prdD = mapper.toEntity(productDtoReq, basePath);
-
-        assertNotNull(prdD);
-        assertEquals(base64Str, prdD.image());
-        assertThat(product)
-                .usingRecursiveComparison()
-                .ignoringFields("image")
-                .isEqualTo(prdD);
+            assertEquals(encodedata, result);
+        }
     }
 
     @Test
-    void shouldMapProductDtoReqToEntity(){
-        mapper = spy(Mappers.getMapper(ProductMapper.class));
-        String base64Str = "base64String";
+    void shouldThrowImageFailToLoadException() throws IOException {
+        mapper = Mappers.getMapper(ProductMapper.class);
 
-        doReturn(base64Str).when(mapper).toBase64(anyString(), anyString());
+        try(MockedStatic<Files> mockedFiles = mockStatic(Files.class)){
+            mockedFiles.when( ()-> Files.readAllBytes(any())).thenThrow(new IOException());
+//        when(Files.readAllBytes(any())).thenThrow(new IOException());
 
-        Product prdD = mapper.toEntity(productDtoReq, basePath);
-
-        assertNotNull(prdD);
-        assertEquals(base64Str, prdD.image());
-        assertThat(product)
-                .usingRecursiveComparison()
-                .ignoringFields("image")
-                .isEqualTo(prdD);
+            assertThrows(
+                    ImageFailToLoadException.class,
+                    () -> mapper.toBase64("name", basePath));
+        }
     }
 
 }

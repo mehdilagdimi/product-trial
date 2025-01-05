@@ -54,130 +54,116 @@ public class Product {
                 this.updatedAt = Date.from(Instant.now()).getTime();
         }
 
-        public Long id() {
+        public Long getId() {
                 return id;
         }
 
-        public Product setId(Long id) {
+        public void setId(Long id) {
                 this.id = id;
-                return this;
         }
 
-        public String code() {
+        public String getCode() {
                 return code;
         }
 
-        public Product setCode(String code) {
+        public void setCode(String code) {
                 this.code = code;
-                return this;
         }
 
-        public String name() {
+        public String getName() {
                 return name;
         }
 
-        public Product setName(String name) {
+        public void setName(String name) {
                 this.name = name;
-                return this;
         }
 
-        public String description() {
+        public String getDescription() {
                 return description;
         }
 
-        public Product setDescription(String description) {
+        public void setDescription(String description) {
                 this.description = description;
-                return this;
         }
 
-        public String image() {
+        public String getImage() {
                 return image;
         }
 
-        public Product setImage(String image) {
+        public void setImage(String image) {
                 this.image = image;
-                return this;
         }
 
-        public String category() {
+        public String getCategory() {
                 return category;
         }
 
-        public Product setCategory(String category) {
+        public void setCategory(String category) {
                 this.category = category;
-                return this;
         }
 
-        public float price() {
+        public float getPrice() {
                 return price;
         }
 
-        public Product setPrice(float price) {
+        public void setPrice(float price) {
                 this.price = price;
-                return this;
         }
 
-        public int quantity() {
+        public int getQuantity() {
                 return quantity;
         }
 
-        public Product setQuantity(int quantity) {
+        public void setQuantity(int quantity) {
                 this.quantity = quantity;
-                return this;
         }
 
-        public String internalReference() {
+        public String getInternalReference() {
                 return internalReference;
         }
 
-        public Product setInternalReference(String internalReference) {
+        public void setInternalReference(String internalReference) {
                 this.internalReference = internalReference;
-                return this;
         }
 
-        public int shellId() {
+        public int getShellId() {
                 return shellId;
         }
 
-        public Product setShellId(int shellId) {
+        public void setShellId(int shellId) {
                 this.shellId = shellId;
-                return this;
         }
 
-        public InventoryStatus inventoryStatus() {
+        public InventoryStatus getInventoryStatus() {
                 return inventoryStatus;
         }
 
-        public Product setInventoryStatus(InventoryStatus inventoryStatus) {
+        public void setInventoryStatus(InventoryStatus inventoryStatus) {
                 this.inventoryStatus = inventoryStatus;
-                return this;
         }
 
-        public short rating() {
+        public short getRating() {
                 return rating;
         }
 
-        public Product setRating(short rating) {
+        public void setRating(short rating) {
                 this.rating = rating;
-                return this;
         }
 
-        public Long createdAt() {
+        public Long getCreatedAt() {
                 return createdAt;
         }
 
-        public Product setCreatedAt(Long createdAt) {
+        public void setCreatedAt(Long createdAt) {
                 this.createdAt = createdAt;
-                return this;
         }
 
-        public Long updatedAt() {
+        public Long getUpdatedAt() {
                 return updatedAt;
         }
 
-        public Product setUpdatedAt(Long updatedAt) {
+        public void setUpdatedAt(Long updatedAt) {
                 this.updatedAt = updatedAt;
-                return this;
         }
 
         @Override

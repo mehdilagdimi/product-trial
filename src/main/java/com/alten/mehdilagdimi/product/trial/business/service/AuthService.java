@@ -32,9 +32,9 @@ public class AuthService {
 
         logger.info("Successfully authenticated");
         return new AuthResp(
-                user.username(),
-                user.firstname(),
-                user.email(),
+                user.getUsername(),
+                user.getFirstname(),
+                user.getEmail(),
                 token,
                 jwtUtil.expiration);
     }

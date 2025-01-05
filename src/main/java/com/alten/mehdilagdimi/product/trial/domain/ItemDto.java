@@ -1,14 +1,8 @@
 package com.alten.mehdilagdimi.product.trial.domain;
 
-import jakarta.persistence.*;
-
-@Entity
-public class Item {
-        @Id
-        @GeneratedValue
+public class ItemDto {
         Long id;
-        @ManyToOne
-        Product product;
+        ProductDtoResp product;
         int quantity;
 
         public Long getId() {
@@ -19,11 +13,11 @@ public class Item {
                 this.id = id;
         }
 
-        public Product getProduct() {
+        public ProductDtoResp getProduct() {
                 return product;
         }
 
-        public void setProduct(Product product) {
+        public void setProduct(ProductDtoResp product) {
                 this.product = product;
         }
 

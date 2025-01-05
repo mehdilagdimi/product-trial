@@ -26,7 +26,7 @@ public class AuthController {
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(userAccount.id())
+                .buildAndExpand(userAccount.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(authService.createAccount(reqBody));
     }

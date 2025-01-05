@@ -3,7 +3,6 @@ package com.alten.mehdilagdimi.product.trial.domain;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class WishList{
@@ -14,31 +13,29 @@ public class WishList{
         @OneToMany
         List<Product> productList;
 
-        public Long id() {
+        public Long getId() {
                 return id;
         }
 
-        public WishList setId(Long id) {
+        public void setId(Long id) {
                 this.id = id;
-                return this;
         }
 
-        public UserAccount user() {
+        public UserAccount getUser() {
                 return user;
         }
 
-        public WishList setUser(UserAccount user) {
+        public void setUser(UserAccount user) {
                 this.user = user;
-                return this;
         }
 
-        public List<Product> productList() {
+        public List<Product> getProductList() {
                 return productList;
         }
 
-        public WishList setProductList(List<Product> productList) {
+        public void setProductList(List<Product> productList) {
                 this.productList = productList;
-                return this;
         }
+
 }
 

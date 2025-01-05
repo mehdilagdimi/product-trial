@@ -1,15 +1,15 @@
-port: 8081
+port: ${PORT}
 
 spring:
   datasource:
-    url: jdbc:h2:mem:devdb;create=true
+    url: ${DB_URL}
 
 jwt:
-  secret: cHJvZHVjdC10cmlhbC1qd3Qtc2VjcmV0LWtleQ==
-  expiration: 86_400_000
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION}
 
 admin:
-  email: admin@admin.com
+  email: ${ADMIN_EMAIL}
 
 products:
-  imgsDir: ./imgs
+  imgsDir: ${PRODUCTS_IMGS_DIR}

@@ -19,67 +19,125 @@ public class UserAccount {
         @OneToOne(mappedBy = "user")
         WishList wishList;
 
-        public Long id() {
+        public Long getId() {
                 return id;
         }
 
-        public UserAccount setId(Long id) {
+        public void setId(Long id) {
                 this.id = id;
-                return this;
         }
 
-        public String username() {
+        public String getUsername() {
                 return username;
         }
 
-        public UserAccount setUsername(String username) {
+        public void setUsername(String username) {
                 this.username = username;
-                return this;
         }
 
-        public String firstname() {
+        public String getFirstname() {
                 return firstname;
         }
 
-        public UserAccount setFirstname(String firstname) {
+        public void setFirstname(String firstname) {
                 this.firstname = firstname;
-                return this;
         }
 
-        public String email() {
+        public String getEmail() {
                 return email;
         }
 
-        public UserAccount setEmail(String email) {
+        public void setEmail(String email) {
                 this.email = email;
-                return this;
         }
 
-        public String password() {
+        public String getPassword() {
                 return password;
         }
 
-        public UserAccount setPassword(String password) {
+        public void setPassword(String password) {
                 this.password = password;
-                return this;
         }
 
-        public List<Cart> cart() {
+        public List<Cart> getCart() {
                 return cart;
         }
 
-        public UserAccount setCart(List<Cart> cart) {
+        public void setCart(List<Cart> cart) {
                 this.cart = cart;
-                return this;
         }
 
-        public WishList wishList() {
+        public WishList getWishList() {
                 return wishList;
         }
 
-        public UserAccount setWishList(WishList wishList) {
+        public void setWishList(WishList wishList) {
                 this.wishList = wishList;
-                return this;
         }
+
+        //        public Long id() {
+//                return id;
+//        }
+//
+//        public UserAccount setId(Long id) {
+//                this.id = id;
+//                return this;
+//        }
+//
+//        public String username() {
+//                return username;
+//        }
+//
+//        public UserAccount setUsername(String username) {
+//                this.username = username;
+//                return this;
+//        }
+//
+//        public String firstname() {
+//                return firstname;
+//        }
+//
+//        public UserAccount setFirstname(String firstname) {
+//                this.firstname = firstname;
+//                return this;
+//        }
+//
+//        public String email() {
+//                return email;
+//        }
+//
+//        public UserAccount setEmail(String email) {
+//                this.email = email;
+//                return this;
+//        }
+//
+//        public String password() {
+//                return password;
+//        }
+//
+//        public UserAccount setPassword(String password) {
+//                this.password = password;
+//                return this;
+//        }
+//
+//        public List<Cart> cart() {
+//                return cart;
+//        }
+//
+//        public UserAccount setCart(List<Cart> cart) {
+//                this.cart = cart;
+//                return this;
+//        }
+//
+//        public WishList wishList() {
+//                return wishList;
+//        }
+//
+//        public UserAccount setWishList(WishList wishList) {
+//                this.wishList = wishList;
+//                return this;
+//        }
+//
+
 }
 

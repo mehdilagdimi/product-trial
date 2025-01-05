@@ -4,16 +4,13 @@ import com.alten.mehdilagdimi.product.trial.domain.WishList;
 import com.alten.mehdilagdimi.product.trial.domain.WishlistDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = ProductMapper.class)
 public interface WishlistMapper {
-
-    Logger logger = LoggerFactory.getLogger(WishlistMapper.class);
 
     @Mapping( source = "user.id", target = "userId")
     @Mapping( source = "user.email", target = "email")
+    @Mapping( source = "productList", target = "products")
     WishlistDto toDto(WishList p);
 
 }

@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -48,25 +47,28 @@ public class CartService {
                 productRepository
                         .findById(productId)
                         .orElseThrow(() -> new ProductNotFoundException(productId));
-        Item item = new Item().setProduct(product);
+
+        Item item = new Item();
+        item.setProduct(product);
+
         Cart cart;
         if (existingCart.isPresent()) {
             cart = existingCart.get();
             Optional<Item> itemInCart =
-                    cart.items()
+                    cart.getItems()
                             .stream()
-                            .filter(i -> item.product().equals(product))
+                            .filter(i -> item.getProduct().equals(product))
                             .findFirst();
 
             itemInCart.ifPresentOrElse(
-                    i ->  i.setQuantity(i.quantity() + 1),
-                    () ->  cart.items().add(item)
+                    i ->  i.setQuantity(i.getQuantity() + 1),
+                    () ->  cart.getItems().add(item)
             );
 
         } else {
-            cart = new Cart()
-                            .setUser(user)
-                            .setItems(new HashSet<>(List.of(item)));
+            cart = new Cart();
+            cart.setUser(user);
+            cart.setItems(new HashSet<>(List.of(item)));
         }
 
         return cartMapper.toDto( repository.save(cart) );
@@ -76,7 +78,7 @@ public class CartService {
         Optional<Cart> cartOptional = repository.findByUserEmail(email);
         if (cartOptional.isPresent()) {
             Cart cart = cartOptional.get();
-            cart.items().removeIf(item -> item.product().id().equals(productId));
+            cart.getItems().removeIf(item -> item.getProduct().getId().equals(productId));
             return cartMapper.toDto( repository.save( cart ) );
         } else {
             throw new NoCartFoundForUserException(email);

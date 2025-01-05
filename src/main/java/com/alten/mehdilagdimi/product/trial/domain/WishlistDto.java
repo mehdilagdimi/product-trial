@@ -5,7 +5,7 @@ import java.util.List;
 
 public record WishlistDto(
         Long id,
-        String userId,
+        Long userId,
         String email,
-        List<Product> products) {}
+        List<ProductDtoResp> products) {}
 

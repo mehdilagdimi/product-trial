@@ -53,7 +53,7 @@ public class WishListService {
             wishlist.setUser(user);
             wishlist.setProductList(new ArrayList<>(List.of(product)));
         } else {
-            wishlist.productList().add(product);
+            wishlist.getProductList().add(product);
         }
 
         return mapper.toDto(repository.save(wishlist));
@@ -62,8 +62,8 @@ public class WishListService {
     public WishlistDto removeProductFromWishlist(String email, Long productId) {
         WishList wishlist = repository.findByUserEmail(email);
         if (wishlist != null) {
-            wishlist.productList()
-                    .removeIf(product -> product.id().equals(productId));
+            wishlist.getProductList()
+                    .removeIf(product -> product.getId().equals(productId));
             return mapper.toDto(repository.save(wishlist));
         } else {
             logger.warn("Product not found in wishlist, product ID : {}", productId);
