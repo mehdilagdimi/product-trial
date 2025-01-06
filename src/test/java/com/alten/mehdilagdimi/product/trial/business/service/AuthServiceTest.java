@@ -1,5 +1,6 @@
 package com.alten.mehdilagdimi.product.trial.business.service;
 
+import com.alten.mehdilagdimi.product.trial.business.exception.UserNotFoundForAuthException;
 import com.alten.mehdilagdimi.product.trial.business.util.JwtUtil;
 import com.alten.mehdilagdimi.product.trial.domain.AuthReq;
 import com.alten.mehdilagdimi.product.trial.domain.AuthResp;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Optional;
 
@@ -67,10 +67,10 @@ class AuthServiceTest {
         when(userAccountRepository.findByEmailAndPassword(authReq.email(), authReq.password()))
                 .thenReturn(Optional.empty());
 
-        UsernameNotFoundException exception =
-                assertThrows( UsernameNotFoundException.class, () -> authService.authenticate(authReq));
+        UserNotFoundForAuthException exception =
+                assertThrows( UserNotFoundForAuthException.class, () -> authService.authenticate(authReq));
 
-        assertEquals("User not found with email : " + authReq.email(), exception.getMessage());
+        assertEquals("User not found for authentication with provided email/id : " + authReq.email(), exception.getMessage());
     }
 
 

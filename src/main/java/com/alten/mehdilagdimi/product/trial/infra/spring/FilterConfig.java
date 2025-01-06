@@ -17,7 +17,7 @@ public class FilterConfig {
     }
 
     @Bean
-    public FilterRegistrationBean<CustomFilter> productCrudFilter(CustomFilter customFilter) {
+    public FilterRegistrationBean<CustomFilter> customFilter(CustomFilter customFilter) {
         FilterRegistrationBean<CustomFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(customFilter);
         registrationBean.addUrlPatterns(customFilter.urlPattern);
