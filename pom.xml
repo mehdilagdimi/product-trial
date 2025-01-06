@@ -18,6 +18,7 @@
         <spring-boot-version>3.4.0</spring-boot-version>
         <mapStruct-version>1.6.0</mapStruct-version>
         <jjwt-version>0.12.6</jjwt-version>
+        <jib-version>3.4.0</jib-version>
     </properties>
 
     <dependencyManagement>
@@ -87,6 +88,29 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>${jib-version}</version>
+                <configuration>
+                    <from>
+                        <image>eclipse-temurin:17-jre-ubi9-minimal</image>
+                    </from>
+                    <to>
+                        <image>alten/product-trial</image>
+                        <tags>
+                            <tag>v1.0.0</tag>
+                        </tags>
+                    </to>
+                    <container>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+                    </container>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
