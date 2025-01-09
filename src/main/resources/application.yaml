@@ -1,9 +1,25 @@
-port: ${PORT}
+server:
+  port: ${PORT}
 
 spring:
   datasource:
     url: ${DB_URL}
+    driverClassName: org.h2.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: create
+  h2:
+    console:
+      enabled: true
+  mvc:
+    servlet:
+      path: /api
 
+logging:
+  level:
+    root: DEBUG
 jwt:
   secret: ${JWT_SECRET}
   expiration: ${JWT_EXPIRATION}

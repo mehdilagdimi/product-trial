@@ -2,13 +2,12 @@ package com.alten.mehdilagdimi.product.trial.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import java.util.List;
+import jakarta.validation.constraints.Email;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record WishlistDto(
+public record UserResp(
         Long id,
-        Long userId,
-        String email,
-        List<ProductDtoResp> products) {}
+        @Email String email,
+        String username,
+        String firstname) {}
 

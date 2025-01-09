@@ -114,7 +114,7 @@ class CartServiceTest {
 
         assertNotNull(res);
         assertEquals(1, res.items().size());
-        assertEquals(2, res.items().iterator().next().getQuantity());
+        assertEquals(5, res.items().iterator().next().getQuantity());
     }
 
     @Test

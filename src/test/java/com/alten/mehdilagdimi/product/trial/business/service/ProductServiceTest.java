@@ -17,6 +17,7 @@ import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -51,7 +52,7 @@ class ProductServiceTest {
     @BeforeEach
     void setUp() {
         productDtoReq = new ProductDtoReq("code", null, null, null, 50.5f, 0, null, 0, null, (short)0);
-        productDtoResp = new ProductDtoResp(1L, "code", null, null, "base64Str", null, 0, 0, null, 0, null, (short)0,  0, 0);
+        productDtoResp = new ProductDtoResp(1L, "code", null, null, "base64Str", null, 50.5f, 0, null, 0, null, (short)0,  0, 0);
         product = new Product();
         product.setId(1L);
         product.setCode("code");
@@ -91,15 +92,24 @@ class ProductServiceTest {
         doNothing().when(multipartFile).transferTo(any(Path.class));
         when(productRepository.save(any(Product.class))).thenReturn(product);
         when(productMapper.toEntity(any(ProductDtoReq.class), anyString())).thenReturn(product);
-        when(productMapper.toDto(any(Product.class), anyString())).thenReturn(productDtoResp);
+        when(productMapper.toDto(any(Product.class), any())).thenReturn(productDtoResp);
 
-        ProductDtoResp result = productService.save(productDtoReq, multipartFile);
+        try (MockedStatic<Paths> mockedPaths = mockStatic(Paths.class);
+        MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
 
-        assertNotNull(result);
-        assertEquals(1L, result.id());
-        assertEquals("code", result.code());
-        assertEquals(50.5f, result.price());
-        assertEquals("base64Str", result.image());
+            Path mockPath = mock(Path.class);
+            mockedPaths.when(() -> Paths.get(anyString())).thenReturn(mockPath);
+            mockedFiles.when(() -> Files.exists(any(Path.class))).thenReturn(true);
+
+            ProductDtoResp result = productService.save(productDtoReq, multipartFile);
+            assertNotNull(result);
+            assertEquals(1L, result.id());
+            assertEquals("code", result.code());
+            assertEquals(50.5f, result.price());
+            assertEquals("base64Str", result.image());
+        }
+
+
     }
 
     @Test
